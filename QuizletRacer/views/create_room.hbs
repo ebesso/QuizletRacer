@@ -1,0 +1,56 @@
+<!doctype HTML>
+<html>
+<head>
+
+    <title>Create Room</title>
+
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+
+    <script src="/js/create_room.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+    <h1>Create Room</h1>
+
+    <form action="/room/create" method="post">
+        <label for="quizlet-link">Enter quizlet link</label>
+        <input id="quizlet-link" type="text" name="quizlet-link" />
+        <input id="load-quizlet" value="Load" type="button"/>
+
+        <br />
+
+        <label for="alternatives">Alternatives?</label>
+        <input id="alternatives" name="alternatives" type="checkbox" />
+
+        <br />
+
+        <div id="number-of-alternatives-container" hidden>
+
+            <label for="alternatives-number">Number of alternatives</label>
+            <input type="number" placeholder="2-4" name="alternatives-number" id="alternatives-number" />
+
+        </div>
+       
+        <br />
+
+        <label for="all-terms">Use all terms</label>
+        <input id="all-terms" name="all-terms" type="checkbox" checked/>
+
+        <br />
+
+        <div id="number-of-terms-container" hidden>
+
+            <label for="terms">Number of terms per race</label>
+            <input id="terms" name="terms" type="number" value="0" />
+
+        </div>
+        
+        <br />
+
+        <input type="button" value="Create" id="create-btn"/>
+
+    </form>
+
+</body>
+</html>
