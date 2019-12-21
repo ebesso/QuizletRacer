@@ -18,9 +18,15 @@ $(document).ready(function () {
 
     });
 
+    socket.on('disconnect', function(){
+
+        window.location.replace('http://www.google.com');
+
+    });
+
     socket.on('leave', function () {
 
-        window.location.href = '/Google.com';
+        window.location.replace('http://www.google.com');
 
     });
 
@@ -39,6 +45,7 @@ $(document).ready(function () {
     socket.on('left-room', function (data) {
 
         window.add_message(null, `${data.name} has disconnected`);
+        
 
     });
 

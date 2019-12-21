@@ -18,16 +18,16 @@ var userSchema = new Schema({
 
 userSchema.methods.remove = function (cb) {
 
-    var socketID = this.socketID;
+    var user = this;
 
-    Room.leaveRoom(this, function (err, room) {
+    Room.leaveRoom(user, function (err, room) {
 
         if (err) {
             console.log(err.message);
             cb('Failed to leave room, will not delete user');
         }
-        User.findOneAndDelete({ socketID: socketID}).exec(cb);
-
+        User.findOneAndDelete({ socketID: user.socketID}).exec(cb);
+        
     });
 
 }

@@ -23,18 +23,19 @@ exports = module.exports = function (io) {
                         else {
                             socket.leave(room.code);
 
-                            io.to(room.code).emit('left-room', { name: user.name });
-                            socketUsers.updateUsers(io, room.code);
+                            io.to(room.code).emit('left-room', { name: user.name });                            
+
                         }
+                        user.remove(function (err) {
 
-                    });
+                            if (err) console.log(err);
+                            else console.log('Removed from room');
 
-                    console.log(`${user.name} disconnected`);
+                            console.log(`${user.name} disconnected`);
 
-                    user.remove(function (err) {
-
-                        if (err) console.log(err);
-                        else console.log('Removed from room');
+                            socketUsers.updateUsers(io, room.code);
+    
+                        });
 
                     });
                 }
@@ -92,7 +93,6 @@ exports = module.exports = function (io) {
                             });
 
                         }
-
 
                     });
                 }

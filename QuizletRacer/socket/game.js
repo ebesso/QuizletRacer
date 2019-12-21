@@ -14,27 +14,27 @@ module.exports = function (socket, io) {
 
                 user.toggleReady(function (started) {
 
-                    //if (started) {
+                    if (started) {
 
-                    //    console.log(`Starting room...`);
+                       console.log(`Starting room...`);
 
-                    //    user.findRoom(function (err, room) {
+                       user.findRoom(function (err, room) {
 
-                    //        if (err) console.log(err.message);
+                           if (err) console.log(err.message);
 
-                    //        else {
+                           else {
 
-                    //            room.generateGameData(function (data) {
+                               room.generateGameData(function (data) {
 
-                    //                socket.emit('game-start', data);
+                                   socket.emit('game-start', data);
 
-                    //            });
+                               });
 
-                    //        }
+                           }
 
-                    //    });
+                       });
 
-                    //}
+                    }
 
 
                     user.findRoom(function (err, room) {

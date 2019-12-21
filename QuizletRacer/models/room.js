@@ -106,33 +106,32 @@ roomSchema.methods.tryStartRoom = function (cb) {
 
     var room = this;
     var allReady = true;
+    
+    room.populate('users', function(err, populatedRoom){
 
-    for (var i = 0; i < room.users.length; i++) {
-        if (room.users[i].ready == false) allReady = false;
-    }
+        if(room.users.some(u => u.ready == false) == false){
 
-    if (allReady) {
-
-        if (room.active == false) {
-
-            if (room.users.length > 1) {
-
-                room.active = true;
-                room.save(function (err, newRoom) {
-
-                    console.log('Started room');
-
-                    return cb(true);
-
-                });
-
+            if (room.active == false) {
+    
+                if (room.users.length > 1) {
+    
+                    // room.active = true;
+                    room.save(function (err, newRoom) {
+    
+                        console.log('Started room');
+    
+                        return cb(true);
+    
+                    });
+    
+                }
+                
             }
-            
+
         }
+        cb(false);
 
-    }
-
-    cb(false);
+    });
 
 }
 
@@ -152,17 +151,13 @@ roomSchema.statics.leaveRoom = function (user, cb) {
             cb({message: 'User is not in room'}, null)
 
         }else {
-            var index = room.users.indexOf(user._id);
-            if (index < -1) {
-                console.log('Tried remove user that does not exist');
-                cb({ message: 'User does not exist' }, null);
-            } else {
 
-                room.users.splice(index, 1);
+            Room.update( room, { $pullAll: {users: [user._id] } }, function(err, newRoom){
 
-                room.save(cb);
+                cb(err, newRoom);
 
-            }
+            });
+
         }
     });
 
