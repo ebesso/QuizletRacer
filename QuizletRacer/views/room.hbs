@@ -34,20 +34,47 @@
 
     <br />
 
-    <label for="ready">Ready: </label>
-    <input type="checkbox" id="ready" name="ready"/>
+    <div id="intermission-container">
 
-    <h2 id="countdown"></h2>
-    
-    <table id="users">
+        <label for="ready">Ready: </label>
+        <input type="checkbox" id="ready" name="ready" />
 
-        <tr>
-            <th>Name</th>
-            <th>Ready</th>
-        </tr>
+        <h2 id="countdown"></h2>
 
-    </table>
+        <table id="users">
 
+            <tr>
+                <th>Name</th>
+                <th>Ready</th>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div id="game-container">
+        
+        <h2 id="term"></h2>
+
+        <div id="answer-container">
+
+            <label for="answer-input">Answer: </label>
+            <input type="text" name="answer-input" id="answer-input"/>
+            <button id="answer-btn">Submit</button>
+        
+        </div>
+
+        <table id="leaderboard">
+
+            <tr>
+                <th>Name</th>
+                <th>Correct</th>
+            </tr>
+
+        </table>
+
+
+    </div>
 
 </body>
 </html>

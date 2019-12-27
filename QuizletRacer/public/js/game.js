@@ -2,14 +2,16 @@ $(document).ready(function () {
 
     var socket = window.socket;
 
-    var terms = {}
+    var terms = []
+    var definitions = []
+
     var alternatives;
 
-    var started = false;
+    window.started = false;
 
-    var term_index = 0;
+    var index = 0;
 
-    if (started) {
+    if (window.started) {
         $('#intermission-container').hide();
         $('#game-container').show();
     } else {
@@ -20,21 +22,27 @@ $(document).ready(function () {
 
     socket.on('game-start', function (data) {
 
-        terms = data.terms;
+        console.log(data);
+
+        for (var item in data.terms) {
+
+            definitions.push(data.terms[item].definition);
+            terms.push(data.terms[item].term);
+
+        }
+
         alternatives = data.alternatives;
 
         console.log('Game started');            
-
-        console.log(terms);
-        console.log('Alternatives: ' + alternatives);
 
         start_game();
 
     });
 
-    socket.on('game-update', function (data) {
+    socket.on('game-end', function (data) {
 
-
+        alert(data.winner.name + ' has won the game');
+        end_game();
 
     });
 
@@ -44,32 +52,67 @@ $(document).ready(function () {
 
     });
 
+
     function start_game() {
 
         $('#intermission-container').hide();
+        $('#game-container').show();
 
-        started = true;
+        window.started  = true;
 
-        term_index = 0;
+        index = 0;
+
+        next_term();
 
     }
 
     function next_term() {
 
-           
+        console.log(terms[index]);
+
+        $('#term').html(terms[index]);
 
     }
 
-    function submit_answer() {
+    function submit_answer(answer) {
+
+        console.log('Answer: ' + answer.toLowerCase());
+        console.log('Definition: ' + definitions[index].toLowerCase());
+
+        if (answer.toLowerCase() == definitions[index].toLowerCase()) {
+
+            socket.emit('player-answer');
+
+            console.log('Answer correct');
+
+            index++;
+
+            if (index == terms.length - 1) {
+
+                end_game();
+
+            } else {
+
+                next_term();
+
+            }
 
 
+
+
+
+        } else {
+
+            console.log('Answer incorrect');
+
+        }
 
 
     }
 
     function end_game() {
 
-        started = false;
+        window.started = false;
 
         $('#intermission-container').show();
         $('#game-container').hide();
@@ -77,5 +120,15 @@ $(document).ready(function () {
         console.log('The game has ended');
 
     }
+
+    $('#answer-btn').click(function () {
+
+        answer = $('#answer-input').val();
+
+        submit_answer(answer);
+
+        $('#answer-input').val(''); 
+
+    });
 
 });

@@ -27,7 +27,8 @@ module.exports = function (socket, io) {
                                room.generateGameData(function (data) {
 
                                    if (room != null) {
-                                       io.room(room.code).emit('game-start', data);
+                                       io.in(room.code).emit('game-start', data);
+                                       socketUser.updateUsers(io, room.code)
 
                                    }
 
@@ -51,6 +52,43 @@ module.exports = function (socket, io) {
                 });
 
             }
+
+        });
+
+    });
+
+    socket.on('player-answer', function () {
+
+        User.findUser(socket.id, function (err, user) {
+
+            console.log(user.name + ' has answered correctly');
+
+            user.correct++;
+
+            user.save(function (err, newUser) {
+
+                newUser.findRoom(function (err, room) {
+
+                    if (newUser.correct == room.terms.length - 1) {
+
+                        console.log(user.name + ' has won the game');
+
+                        io.in(room.code).emit('game-end', {
+
+                            'winner': user,
+
+                        });
+
+
+                    }
+
+                    socketUser.updateUsers(io, room.code);
+
+
+                });
+
+
+            });
 
         });
 
