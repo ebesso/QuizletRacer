@@ -54,20 +54,19 @@ userSchema.methods.toggleReady = function (cb) {
 
             user.findRoom(function (err, room) {
 
-                if (err) console.log(err.message);
-                else {
+                room.tryStartRoom(function (started) {
 
-                    room.tryStartRoom(function (started) {
+                    if (started) {
 
-                        if (started) {
+                        cb(true)
+                        return;
+                    } else {
+                        cb(false)
+                    }
 
-                            cb(true)
-                            return;
-                        }
+                });
 
-                    });
-
-                }
+                
 
             });
 
@@ -76,9 +75,6 @@ userSchema.methods.toggleReady = function (cb) {
 
 
     }
-
-    cb(false);
-
 }
 
 userSchema.methods.findRoom = function (cb) {

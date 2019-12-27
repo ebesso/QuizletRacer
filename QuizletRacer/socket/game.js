@@ -26,7 +26,10 @@ module.exports = function (socket, io) {
 
                                room.generateGameData(function (data) {
 
-                                   socket.emit('game-start', data);
+                                   if (room != null) {
+                                       io.room(room.code).emit('game-start', data);
+
+                                   }
 
                                });
 

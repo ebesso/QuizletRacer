@@ -105,31 +105,38 @@ roomSchema.methods.generateGameData = function (cb) {
 roomSchema.methods.tryStartRoom = function (cb) {
 
     var room = this;
-    var allReady = true;
     
     room.populate('users', function(err, populatedRoom){
 
-        if(room.users.some(u => u.ready == false) == false){
+        if (room.users.some(u => u.ready == false) == false) {
 
             if (room.active == false) {
-    
+
                 if (room.users.length > 1) {
-    
-                    // room.active = true;
+
+                    room.active = true;
+
                     room.save(function (err, newRoom) {
-    
+
                         console.log('Started room');
-    
+
                         return cb(true);
-    
+
                     });
-    
+
+                } else {
+                    cb(false);
                 }
-                
+
+            } else {
+
+                cb(false)
+
             }
 
+        } else {
+            cb(false);
         }
-        cb(false);
 
     });
 
@@ -242,7 +249,7 @@ roomSchema.statics.createRoom = function (link, alternative, alternatives, allTe
 
 roomSchema.statics.clearRooms = function (cb) {
 
-    Room.updateMany({}, { $set: {users: []}}, function(err, affected) {
+    Room.updateMany({}, { $set: {users: [], active: false}}, function(err, affected) {
 
         if (err) console.log(err);
         else console.log('Cleared rooms');
