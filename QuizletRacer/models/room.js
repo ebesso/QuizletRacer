@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
+const User = require('./user');
+
 const rp = require('request-promise');
 const cheerio = require('cheerio');
 
@@ -141,6 +143,82 @@ roomSchema.methods.tryStartRoom = function (cb) {
     });
 
 }
+
+//roomschema.methods.tryendroom = function (cb) {
+
+//    var room = this;
+
+//    if (room == null) console.log('room is null');
+
+//    room.populate('users', function(err, pr) {
+
+//        if (err) console.log(err.message);
+
+//        var hasfinished = false;
+//        var winner;
+
+//        var promise = new promise(function (resolve, reject) {
+
+//            var i = 0;
+
+//            for (var u in room.users) {
+
+//                console.log(u.name);
+
+//                if (u.correct == pr.terms.length) {
+//                    hasfinished = true;
+//                    winner = u;
+
+//                    console.log('user ' + winner.name + ' has won in room ' + room.code);
+
+//                    resolve();
+//                }
+//                if (i == room.users.length - 1) {
+//                    resolve();
+//                }
+//                i++;
+
+
+
+//            }
+
+//        });
+
+//        promise.then(function () {
+
+//            if (hasfinished == true) {
+
+//                room.active = false;
+
+//                room.save(function (err, newroom) {
+
+//                    user.updatemany(pr.users, { '$set': { 'ready': false, 'correct': 0 } }, function (err) {
+
+//                        if (err) console.log(err.message);
+//                        else console.log('resetted users');
+
+//                        cb(true, winner);
+
+//                    });
+
+
+//                });
+
+//            } else {
+
+//                console.log('did not end room');
+
+//                cb(false, null)
+
+//            }
+
+//        });
+
+
+
+//    });
+
+//}
 
 roomSchema.statics.leaveRoom = function (user, cb) {
 

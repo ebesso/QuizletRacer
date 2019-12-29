@@ -69,17 +69,37 @@ module.exports = function (socket, io) {
 
                 newUser.findRoom(function (err, room) {
 
-                    if (newUser.correct == room.terms.length - 1) {
+                    if (err) console.log(err.message);
+                    if (room == null) console.log('Room not found');
 
-                        console.log(user.name + ' has won the game');
+                    if (newUser.correct == room.terms.length) {
 
-                        io.in(room.code).emit('game-end', {
+                        var winner = newUser;
 
-                            'winner': user,
+                        User.updateMany({ '_id': { '$in': room.users } }, { $set: { ready: false, correct: 0 } }, function (err, affected) {
+
+                            if (err) console.log(err.message);
+
+                            console.log('Resetted users ' + affected.length);
+
+                            Room.updateOne(room, { active: false }, function (err) {
+
+                                console.log('Resetted room');
+
+                                io.in(room.code).emit('game-end', {
+
+                                    'winner': winner,
+
+                                });
+
+                                socketUser.updateUsers(io, room.code);
+
+
+
+                            });
+
 
                         });
-
-
                     }
 
                     socketUser.updateUsers(io, room.code);

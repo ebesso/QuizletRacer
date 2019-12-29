@@ -87,17 +87,11 @@ $(document).ready(function () {
 
             index++;
 
-            if (index == terms.length - 1) {
-
-                end_game();
-
-            } else {
+            if (index != terms.length) {
 
                 next_term();
 
             }
-
-
 
 
 
@@ -117,7 +111,11 @@ $(document).ready(function () {
         $('#intermission-container').show();
         $('#game-container').hide();
 
+        $('#ready').prop('checked', false);
+
         console.log('The game has ended');
+
+
 
     }
 
