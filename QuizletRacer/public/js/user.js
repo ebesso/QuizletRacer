@@ -12,8 +12,16 @@ $(document).ready(function () {
 
                 var user = data.users[i];
 
-                $('#users').append(`<tr class="user-row"><td>${user.name}</td><td>${user.ready}</td></tr>`);
+                var ready;
 
+                if (user.ready) {
+
+                    ready = 'Ready';
+                } else {
+                    ready = 'Not Ready';
+                }
+
+                $('#users').append(`<tr class="user-row"><th scope="row">${i + 1}</th><td>${user.name}</td><td>${ready}</td></tr>`);
             }
 
         } else {

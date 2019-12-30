@@ -1,0 +1,19 @@
+#chat-window {
+    border: solid 2px #dee2e6;
+    margin-bottom: 10px;
+    height: 700px;
+}
+
+#chat {
+
+    padding: 1px;
+
+    list-style-type: none;
+    height: 100%;
+}
+
+#ready {
+
+    margin-left: 10px;
+
+}
