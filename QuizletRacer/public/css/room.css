@@ -17,3 +17,21 @@
     margin-left: 10px;
 
 }
+
+#leaderboard-container {
+
+    margin-bottom: 10px;
+    height: 350px;
+
+}
+
+#question {
+    
+    font-size: 3.5vw;
+
+    margin-top: 100px;
+    margin-bottom: 160px;
+
+    line-height: 100px;
+
+}

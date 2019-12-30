@@ -11,6 +11,20 @@ $(document).ready(function () {
 
     });
 
+    $('#message-input').keypress(function (e) {
+
+        if (e.which == 13) {
+
+            var message = $('#message-input').val();
+            window.socket.emit('new-chat-message', { message: message });
+            window.add_message('You', message);
+
+            $('#message-input').val('');
+
+        }
+
+    });
+
     socket.on('new-chat', function (data) {
 
         window.add_message(data.sender, data.message);

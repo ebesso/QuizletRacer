@@ -41,7 +41,7 @@ $(document).ready(function () {
 
     socket.on('game-end', function (data) {
 
-        alert(data.winner.name + ' has won the game');
+        window.add_message(null, data.winner.name + ' won');
         end_game();
 
     });
@@ -58,6 +58,8 @@ $(document).ready(function () {
         $('#intermission-container').hide();
         $('#game-container').show();
 
+
+        window.add_message(null, 'Game has started');
         window.started  = true;
 
         index = 0;
@@ -70,7 +72,7 @@ $(document).ready(function () {
 
         console.log(terms[index]);
 
-        $('#term').html(terms[index]);
+        $('#question').html(terms[index]);
 
     }
 
@@ -96,7 +98,6 @@ $(document).ready(function () {
 
 
         } else {
-
             console.log('Answer incorrect');
 
         }
@@ -115,17 +116,29 @@ $(document).ready(function () {
 
         console.log('The game has ended');
 
-
-
     }
 
-    $('#answer-btn').click(function () {
+    $('#answer-button').click(function () {
 
-        answer = $('#answer-input').val();
+        answer = $('#answer').val();
 
         submit_answer(answer);
 
-        $('#answer-input').val(''); 
+        $('#answer').val(''); 
+
+    });
+
+    $('#answer').keypress(function (e) {
+
+        if (e.which == 13) {
+
+            answer = $('#answer').val();
+
+            submit_answer(answer);
+
+            $('#answer').val(''); 
+
+        }
 
     });
 

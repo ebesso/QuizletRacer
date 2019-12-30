@@ -32,7 +32,7 @@ $(document).ready(function () {
 
                 var user = data.users[i];
 
-                $('#leaderboard').append(`<tr class="leaderboard-row"><td>${user.name}</td><td>${user.correct}</td></tr>`);
+                $('#leaderboard').append(`<tr class="leaderboard-row"><th scope="row">${i + 1}</th><td>${user.name}</td><td>${user.correct}</td></tr>`);
 
             }
 
