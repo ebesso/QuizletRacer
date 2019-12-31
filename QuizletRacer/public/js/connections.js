@@ -20,13 +20,13 @@ $(document).ready(function () {
 
     socket.on('disconnect', function(){
 
-        window.location.replace('http://www.google.com');
+        window.location.replace('/room/connect');
 
     });
 
     socket.on('leave', function () {
 
-        window.location.replace('http://www.google.com');
+        window.location.replace('/room/connect');
 
     });
 

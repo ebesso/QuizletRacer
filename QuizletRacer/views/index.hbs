@@ -4,9 +4,27 @@
 
     <title>Quizlet Racer</title>
 
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <script src="/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
-    <h1>Hello World</h1>
+    
+    <div class="container">
+
+
+        <center><h1 id="website-label" style="font-size: 72px;">Quizlet Racer</h1></center>
+
+
+        <div class="row">
+            <div class="btn-group col-12" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-secondary" onclick="window.location.href = '/room/create'">Create Room</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="window.location.href = '/room/connect'">Join Room</button>
+            </div>
+        </div>
+
+
+    </div>
 </body>
 </html>

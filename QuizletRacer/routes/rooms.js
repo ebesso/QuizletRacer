@@ -16,8 +16,25 @@ router.post('/create', function (req, res) {
 
     Room.createRoom(req.body['quizlet-link'], req.body['alternatives'], req.body['number-of-alternatives'], req.body['all-terms'], req.body['number-of-terms'], function (err, newRoom) {
 
-        if (err) console.log(`Failed to create room: ${err.message}`);
-        else console.log('Successfully created room');
+        if (err) {
+            console.log(`Failed to create room: ${err.message}`);
+
+            res.send({
+
+                success: false
+
+            });
+
+        }
+        else {
+            console.log('Successfully created room');
+            res.send({
+
+                success: true,
+                code: newRoom.code
+
+            });
+        }
 
     });
 

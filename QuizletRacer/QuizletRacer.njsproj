@@ -37,6 +37,14 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="package.json" />
+    <Content Include="public\css\bootstrap.min.css.map" />
+    <Content Include="public\css\jquery-ui.min.css" />
+    <Content Include="public\js\bootstrap.js.map" />
+    <Content Include="public\css\bootstrap.min.css" />
+    <Content Include="public\css\room.css">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="public\js\bootstrap.min.js" />
     <Content Include="public\js\chat.js">
       <SubType>Code</SubType>
     </Content>
@@ -46,6 +54,7 @@
     <Content Include="public\js\game.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="public\js\jquery-ui.min.js" />
     <Content Include="public\js\jquery.min.js">
       <SubType>Code</SubType>
     </Content>
@@ -91,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="models\" />
+    <Folder Include="public\css\" />
     <Folder Include="socket\" />
     <Folder Include="public\" />
     <Folder Include="public\js\" />

@@ -1,31 +1,32 @@
 <!doctype HTML>
 <html>
-
 <head>
 
-    <title>Connect to room</title>
+    <title>Connect To Room</title>
 
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <script src="/js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
 
-    <h1>Connect</h1>
+    <div class="container">
 
-    <form method="post" action="">
 
-        <label for="username">Code: </label>
-        <input type="text" name="username" id="username" />
-        <input type="submit" value="Connect" />
+        <center><h1 id="website-label" style="font-size: 72px;">Connect To Room</h1></center>
 
-    </form>
 
-    <script type="application/json">
+        <div class="row">
+            <div class="input-group mb-3 col-12">
+                <input type="text" class="form-control" placeholder="Room Code" id="code-input">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="send-button" onclick="window.location.href = '/room/connect/' + getElementById('code-input').value">Connect</button>
+                </div>
+            </div>
+        </div>
 
-        
 
-    </script>
-
+    </div>
 </body>
-
 </html>

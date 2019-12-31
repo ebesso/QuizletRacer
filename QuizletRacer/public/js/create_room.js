@@ -35,46 +35,46 @@ $(document).ready(function () {
 
     $('#create-btn').click(function () {
 
-        if (terms == null) {
-            alert('Please load the quizlet before creating the room');
-            return;
-        }
+        //if (terms == null) {
+        //    alert('Please load the quizlet before creating the room');
+        //    return;
+        //}
 
 
-        if (document.getElementById('alternatives').checked) {
+        //if (document.getElementById('alternatives').checked) {
 
-            var alternatives_number = Number($('#alternatives-number').val());
+        //    var alternatives_number = Number($('#alternatives-number').val());
 
-            if (alternatives_number < 2 || alternatives_number > 4) {
-                alert('The number of alternatives must be between 2 and 4');
-                return;
-            }
+        //    if (alternatives_number < 2 || alternatives_number > 4) {
+        //        alert('The number of alternatives must be between 2 and 4');
+        //        return;
+        //    }
 
-        }
+        //}
 
-        if (document.getElementById('all-terms').checked == false) {
+        //if (document.getElementById('all-terms').checked == false) {
 
-            var term_number = Number($('#terms').val());
+        //    var term_number = Number($('#terms').val());
 
-            if (term_number > Object.keys(terms).length || term_number < 1) {
-                alert('Number of terms can not be higher than terms in set');
-                return;
-            }
+        //    if (term_number > Object.keys(terms).length || term_number < 1) {
+        //        alert('Number of terms can not be higher than terms in set');
+        //        return;
+        //    }
 
-        }
+        //}
 
         var data = {
 
-            'quizlet-link': link,
-            'alternatives': document.getElementById('alternatives').checked,
-            'number-of-alternatives': Number($('#alternatives-number').val()), 
-            'all-terms': document.getElementById('all-terms').checked,
-            'number-of-terms': Number($('#terms').val())
+            'quizlet-link': link
         }
 
         $.post('/room/create', data, function (resp) {
 
+            if (resp.success == true) {
 
+                window.location.replace('/room/connect/' + resp.code);
+
+            }
 
         });
 

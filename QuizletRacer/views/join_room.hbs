@@ -3,23 +3,46 @@
 
 <head>
 
-    <title>Join room</title>
+    <title>Join Room</title>
+
+
+    <link rel="stylesheet" href="/css/join_room.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/jquery-ui.min.css" />
+
+
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/jquery-ui.min.js" type="text/javascript"></script>
+
+    <script src="/js/bootstrap.min.js"></script>
 
 
 </head>
 
 <body>
 
-    <h1>Join room</h1>
+    <div class="container">
 
-    <form method="post" action="">
+        <center><h1 id="join-room-label">Join Room</h1></center>
 
-        <label for="username">Username: </label>
-        <input type="text" name="username" id="username"/>
-        <input type="submit" value="join"/>
 
-    </form>
+        <div class="row">
+            <div class="col-12">
 
+                <form method="post" action="">
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Username" id="username" name="username">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit" id="join-button">Join</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
