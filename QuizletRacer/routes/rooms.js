@@ -83,8 +83,6 @@ router.post('/load_quizlet', function (req, res) {
 
         });
 
-
-
 });
 
 router.get('/connect/:code', function (req, res) {

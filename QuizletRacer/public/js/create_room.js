@@ -2,29 +2,40 @@ $(document).ready(function () {
 
     var terms;
     var link;
+    var alternatives = false;
 
-    $('#alternatives').change(function () {
+    $('#alternative-btn').click(function () {
 
-        if (this.checked) $('#number-of-alternatives-container').show();
-        else $('#number-of-alternatives-container').hide();
+        if (alternatives == false) {
 
-    });
+            $(this).addClass('btn-secondary');
+            $(this).removeClass('btn-outline-secondary');
 
-    $('#all-terms').change(function () {
+            $(this).html('Alternatives ON');
 
-        if (this.checked) $('#number-of-terms-container').hide();
-        else $('#number-of-terms-container').show();
+            alternatives = true;
+            
+        } else {
+
+            $(this).removeClass('btn-secondary');
+            $(this).addClass('btn-outline-secondary');
+
+            $(this).html('Alternatives OFF');
+
+            alternatives = false;
+
+        }
 
     });
 
     $('#load-quizlet').click(function () {
 
-        link = $('#quizlet-link').val();
-
-        $.post('/room/load_quizlet', {'quizlet-link': link}, function (resp) {
+        $.post('/room/load_quizlet', { 'quizlet-link': $('#quizlet-link').val()}, function (resp) {
 
             if (!resp.success) alert(resp.message);
+
             else {
+                link = $('#quizlet-link').val();
                 alert(resp.message);
                 terms = resp.terms;
             }
@@ -35,37 +46,15 @@ $(document).ready(function () {
 
     $('#create-btn').click(function () {
 
-        //if (terms == null) {
-        //    alert('Please load the quizlet before creating the room');
-        //    return;
-        //}
-
-
-        //if (document.getElementById('alternatives').checked) {
-
-        //    var alternatives_number = Number($('#alternatives-number').val());
-
-        //    if (alternatives_number < 2 || alternatives_number > 4) {
-        //        alert('The number of alternatives must be between 2 and 4');
-        //        return;
-        //    }
-
-        //}
-
-        //if (document.getElementById('all-terms').checked == false) {
-
-        //    var term_number = Number($('#terms').val());
-
-        //    if (term_number > Object.keys(terms).length || term_number < 1) {
-        //        alert('Number of terms can not be higher than terms in set');
-        //        return;
-        //    }
-
-        //}
+        if (terms == null) {
+            alert('Please load the quizlet before creating the room');
+            return;
+        }
 
         var data = {
 
-            'quizlet-link': link
+            'quizlet-link': link,
+            'alternatives': alternatives
         }
 
         $.post('/room/create', data, function (resp) {

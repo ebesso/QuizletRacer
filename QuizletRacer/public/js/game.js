@@ -22,8 +22,6 @@ $(document).ready(function () {
 
     socket.on('game-start', function (data) {
 
-        console.log(data);
-
         for (var item in data.terms) {
 
             definitions.push(data.terms[item].definition);
@@ -34,6 +32,7 @@ $(document).ready(function () {
         alternatives = data.alternatives;
 
         console.log('Game started');            
+        console.log('Alternatives is ' + alternatives);
 
         start_game();
 
@@ -58,6 +57,14 @@ $(document).ready(function () {
         $('#intermission-container').hide();
         $('#game-container').show();
 
+        if (alternatives == true) {
+            $('#input-container').hide();
+            $('#alternatives-container').show();
+
+        } else {
+            $('#input-container').show();
+            $('#alternatives-container').hide();
+        }
 
         window.add_message(null, 'Game has started');
         window.started  = true;
@@ -70,9 +77,41 @@ $(document).ready(function () {
 
     function next_term() {
 
-        console.log(terms[index]);
+        if (alternatives == true) {
 
+            $('#alternatives').empty();
+
+            var selected = []
+
+            for (var i = 0; i < 4; i++)
+            {
+
+                if (i == definitions.length) {
+                    break;
+                }
+
+                while (true) {
+                    var alternative = definitions[Math.floor(Math.random() * definitions.length)];
+
+                    if (selected.includes(alternative) == false) {
+                        selected.push(alternative);
+                        break;
+                    }
+                }
+            }
+
+            var alt_size = 12 / selected.length;
+
+            selected.forEach(function (item) {
+
+                $('#alternatives').append('<button class="btn btn-outline-secondary alternative-button col-' + alt_size + '" type="button" data-answer="' + item + '">' + item + '</button>')
+
+            });
+
+        }
         $('#question').html(terms[index]);
+
+
 
     }
 
@@ -139,6 +178,16 @@ $(document).ready(function () {
             $('#answer').val(''); 
 
         }
+
+    });
+
+    $(document).on('click', '.alternative-button' ,function () {
+
+        console.log('Selected: ' + $(this).attr('data-answer'));
+
+        answer = $(this).attr('data-answer');
+
+        submit_answer(answer);
 
     });
 

@@ -38,6 +38,9 @@
     </Content>
     <Content Include="package.json" />
     <Content Include="public\css\bootstrap.min.css.map" />
+    <Content Include="public\css\join_room.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="public\css\jquery-ui.min.css" />
     <Content Include="public\js\bootstrap.js.map" />
     <Content Include="public\css\bootstrap.min.css" />

@@ -56,51 +56,52 @@ roomSchema.methods.generateGameData = function (cb) {
 
     var data = {
 
-        terms: [],
-        alternative: room.configuration.alternative,
-        alternatives: room.configuration.alternatives
+        terms: room.terms,
+        alternatives: room.configuration.alternative
 
     }
 
-    var promise = new Promise(function (resolve, reject) {
+    //var promise = new Promise(function (resolve, reject) {
 
-        if (room.configuration.allTerms) {
-            data.terms = room.terms;
+    //    if (room.configuration.allTerms) {
+    //        data.terms = room.terms;
 
-            resolve();
+    //        resolve();
 
-        } else {
+    //    } else {
 
-            for (var i = 0; i < room.configuration.terms; i++) {
-                var term;
+    //        for (var i = 0; i < room.configuration.terms; i++) {
+    //            var term;
 
-                while (true) {
+    //            while (true) {
 
-                    var index = Math.floor(Math.random() * Math.floor(room.terms.length - 1));
+    //                var index = Math.floor(Math.random() * Math.floor(room.terms.length - 1));
 
-                    term = room.terms[index];
+    //                term = room.terms[index];
 
-                    if (data.terms.includes(term)) {
-                        break;
-                    }
+    //                if (data.terms.includes(term)) {
+    //                    break;
+    //                }
 
-                }
+    //            }
 
-                data.terms.push(term);
+    //            data.terms.push(term);
 
-                if (data.terms.length == i - 1) resolve();
+    //            if (data.terms.length == i - 1) resolve();
 
-            }
+    //        }
 
-        }
+    //    }
 
-    });
+    //});
 
-    promise.then(function () {
+    //promise.then(function () {
 
-        cb(data);
+    //    cb(data);
 
-    });
+    //});
+
+    cb(data);
 
 }
 
