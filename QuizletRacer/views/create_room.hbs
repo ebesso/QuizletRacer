@@ -18,9 +18,18 @@
 
         <form action="/room/create" method="post">
 
+
             <div class="row">
 
+                <div class="col-12" style="margin-top: 20px">
+                    <center><h1>1. Load Quizlet</h1></center>
+                    <hr />
+                </div>
+
                 <div class="input-group mb-3 col-12">
+                    <img class="img-fluid" src="/images/1.png" alt="img-1" style="margin-bottom: 20px;" />
+
+
                     <input type="text" class="form-control" placeholder="Quizlet Link" id="quizlet-link">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="button" id="load-quizlet">Load</button>
@@ -30,13 +39,33 @@
 
             <div class="row">
 
-                <button type="button" class="btn btn-outline-secondary col-6 offset-3" id="alternative-btn">Alternatives OFF</button>
+                <div class="col-12" style="margin-top: 20px">
+                    <center><h1>2. Configuration</h1></center>
+                    <hr />
+                </div>
+
+                <div class="col-12">
+
+                    <button type="button" class="btn btn-outline-secondary col-12" id="alternative-btn">Alternatives OFF</button>
+
+                    <button type="button" class="btn btn-outline-secondary col-12" id="answer-btn" style="margin-top: 20px;">Answer with Definitions</button>
+
+                </div>
 
             </div>
 
             <div class="row">
-                <input type="button" value="Create" id="create-btn" class="btn btn-outline-secondary col-6 offset-3" style="margin-top: 20px;"/>
+                <div class="col-12" style="margin-top: 20px">
+                    <center><h1>3. Create</h1></center>
+                    <hr />
+                </div>
+
+                <div class="col-12">
+                    <input type="button" value="Create" id="create-btn" class="btn btn-outline-secondary col-12"/>
+                </div>
             </div>
+
+
         </form>
     
     </div>

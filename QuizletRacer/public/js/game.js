@@ -83,10 +83,13 @@ $(document).ready(function () {
 
             var selected = []
 
-            for (var i = 0; i < 4; i++)
+            //Add correct answer
+            selected.push(definitions[index]);
+
+            for (var i = 0; i < 3; i++)
             {
 
-                if (i == definitions.length) {
+                if (i == definitions.length - 1) {
                     break;
                 }
 
@@ -102,9 +105,11 @@ $(document).ready(function () {
 
             var alt_size = 12 / selected.length;
 
+            selected = shuffle(selected);
+
             selected.forEach(function (item) {
 
-                $('#alternatives').append('<button class="btn btn-outline-secondary alternative-button col-' + alt_size + '" type="button" data-answer="' + item + '">' + item + '</button>')
+                $('#alternatives').append('<button class="btn btn-outline-secondary alternative-button col-' + alt_size + '" type="button" data-answer="' + definitions.indexOf(item) + '">' + item + '</button>')
 
             });
 
@@ -115,10 +120,20 @@ $(document).ready(function () {
 
     }
 
-    function submit_answer(answer) {
+    function shuffle(a) {
+        var j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            x = a[i];
+            a[i] = a[j];
+            a[j] = x;
+        }
+        return a;
+    }
 
-        console.log('Answer: ' + answer.toLowerCase());
-        console.log('Definition: ' + definitions[index].toLowerCase());
+    async function submit_answer(answer) {
+
+        console.log(answer);
 
         if (answer.toLowerCase() == definitions[index].toLowerCase()) {
 
@@ -137,11 +152,34 @@ $(document).ready(function () {
 
 
         } else {
-            console.log('Answer incorrect');
+
+            if (alternatives) {
+
+                $('#alternatives-container').hide();
+
+                for (var i = 3; i > 0; i--) {
+
+                    $('#question').html('Incorrect Answer: ' + i );
+
+                    await sleep(1000);
+
+                }
+                $('#alternatives-container').show();
+
+                next_term();
+
+
+
+            }
+
 
         }
 
 
+    }
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     function end_game() {
@@ -183,9 +221,7 @@ $(document).ready(function () {
 
     $(document).on('click', '.alternative-button' ,function () {
 
-        console.log('Selected: ' + $(this).attr('data-answer'));
-
-        answer = $(this).attr('data-answer');
+        answer = definitions[Number($(this).attr('data-answer'))];
 
         submit_answer(answer);
 

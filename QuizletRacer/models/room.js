@@ -238,7 +238,18 @@ roomSchema.statics.leaveRoom = function (user, cb) {
 
         }else {
 
-            Room.update( room, { $pullAll: {users: [user._id] } }, function(err, newRoom){
+            Room.updateOne( room, { $pullAll: {users: [user._id] } }, function(err, newRoom){
+
+                if (room.users.length - 1 == 0) {
+                    Room.deleteOne({ code: room.code }, {}, function (err, affected) {
+
+                        if (err) console.log(err.message);
+                        else {
+                            console.log('Removed room because no players');
+                        }
+
+                    });
+                }
 
                 cb(err, newRoom);
 
@@ -260,7 +271,9 @@ roomSchema.statics.findRoom = function (code, cb) {
 
 }
 
-roomSchema.statics.createRoom = function (link, alternative, alternatives, allTerms, terms, cb) {
+roomSchema.statics.createRoom = function (link, alternative, alternatives, allTerms, terms, answerDefinitions, cb) {
+
+    console.log(answerDefinitions);
 
     var configuration = {
 
@@ -290,9 +303,20 @@ roomSchema.statics.createRoom = function (link, alternative, alternatives, allTe
             $('.TermText').each(function (index) {
 
                 if (index == 0 || index % 2 == 0) {
-                    term['term'] = $(this).html();
+                    if (answerDefinitions == 'true') {
+                        term['term'] = $(this).html();
+
+                    } else {
+                        term['definition'] = $(this).html();
+                    }
                 } else {
-                    term['definition'] = $(this).html();
+                    if (answerDefinitions == 'true') {
+                        term['definition'] = $(this).html();
+
+                    } else {
+                        term['term'] = $(this).html();
+                    }
+
                     terms.push(term);
 
                     term = {};
@@ -300,23 +324,50 @@ roomSchema.statics.createRoom = function (link, alternative, alternatives, allTe
                 }
 
             });
+            //var promise = new Promise((resolve, reject) => {
 
-            var newRoom = new Room({
+            //    if (answerDefinitions == false) {
 
-                code: code,
-                link: link,
+            //        console.log('Answer with term');
 
-                terms: terms,
-                users: [],
+            //        for (var i = 0; i < term.length; i++) {
+            //            var temp = term[i]['term'];
 
-                active: false,
+            //            term[i]['term'] = term[i]['definition'];
+            //            term[i]['definition'] = temp;
 
-                configuration: configuration
+            //            if (i + 1 == term.length) resolve();
+
+            //        }
+
+            //    } else {
+            //        resolve();
+            //    }
+
+            //});
+
+            //promise.then(() => {
+
+                var newRoom = new Room({
+
+                    code: code,
+                    link: link,
+
+                    terms: terms,
+                    users: [],
+
+                    active: false,
+
+                    configuration: configuration
 
 
-            });
+                });
 
-            newRoom.save(cb);
+                newRoom.save(cb);
+
+            //});
+            
+
 
         })
         .catch(function (err) {
@@ -328,13 +379,14 @@ roomSchema.statics.createRoom = function (link, alternative, alternatives, allTe
 
 roomSchema.statics.clearRooms = function (cb) {
 
-    Room.updateMany({}, { $set: {users: [], active: false}}, function(err, affected) {
+    Room.deleteMany({}, function (err, affected) {
 
         if (err) console.log(err);
         else console.log('Cleared rooms');
     });
 
 }
+
 
 var Room = mongoose.model('Room', roomSchema);
 

@@ -3,6 +3,7 @@ $(document).ready(function () {
     var terms;
     var link;
     var alternatives = false;
+    var answerDefinitions = true;
 
     $('#alternative-btn').click(function () {
 
@@ -23,6 +24,30 @@ $(document).ready(function () {
             $(this).html('Alternatives OFF');
 
             alternatives = false;
+
+        }
+
+    });
+
+    $('#answer-btn').click(function () {
+
+        if (answerDefinitions == false) {
+
+            $(this).addClass('btn-secondary');
+            $(this).removeClass('btn-outline-secondary');
+
+            $(this).html('Answer with Definitions');
+
+            answerDefinitions = true;
+
+        } else {
+
+            $(this).removeClass('btn-secondary');
+            $(this).addClass('btn-outline-secondary');
+
+            $(this).html('Answer with Terms');
+
+            answerDefinitions = false;
 
         }
 
@@ -54,7 +79,8 @@ $(document).ready(function () {
         var data = {
 
             'quizlet-link': link,
-            'alternatives': alternatives
+            'alternatives': alternatives,
+            'answer-definition': answerDefinitions
         }
 
         $.post('/room/create', data, function (resp) {

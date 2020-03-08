@@ -29,11 +29,16 @@ exports = module.exports = function (io) {
                         user.remove(function (err) {
 
                             if (err) console.log(err);
-                            else console.log('Removed from room');
 
-                            console.log(`${user.name} disconnected`);
+                            else {
+                                console.log('Removed from room');
 
-                            socketUsers.updateUsers(io, room.code);
+                                console.log(`${user.name} disconnected`);
+
+                                if (room != null) {
+                                    socketUsers.updateUsers(io, room.code);
+                                }
+                            }
     
                         });
 

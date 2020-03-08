@@ -27,7 +27,8 @@ userSchema.methods.remove = function (cb) {
             cb('Failed to leave room, will not delete user');
         }
         User.findOneAndDelete({ socketID: user.socketID}).exec(cb);
-        
+
+        cb(null);
     });
 
 }

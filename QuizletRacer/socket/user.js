@@ -11,6 +11,7 @@ function updateUsers(io, code) {
     Room.findRoom(code, function (err, room) {
 
         if (err) console.log(err.message);
+        if (room == null) console.log('Room does not exist');
         else {
 
             var promise = new Promise(function (resolve, reject) {
