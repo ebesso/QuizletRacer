@@ -42,6 +42,10 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="public\css\jquery-ui.min.css" />
+    <Content Include="public\images\1.png" />
+    <Content Include="public\images\2.png" />
+    <Content Include="public\images\3.png" />
+    <Content Include="public\images\4.png" />
     <Content Include="public\js\bootstrap.js.map" />
     <Content Include="public\css\bootstrap.min.css" />
     <Content Include="public\css\room.css">
@@ -92,6 +96,9 @@
     <Content Include="socket\user.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="data.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="views\connect.hbs">
       <SubType>Code</SubType>
     </Content>
@@ -104,6 +111,7 @@
   <ItemGroup>
     <Folder Include="models\" />
     <Folder Include="public\css\" />
+    <Folder Include="public\images\" />
     <Folder Include="socket\" />
     <Folder Include="public\" />
     <Folder Include="public\js\" />

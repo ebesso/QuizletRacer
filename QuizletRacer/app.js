@@ -41,14 +41,20 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 app.use(require('serve-static')('public'))
 
+//Routes
 const index = require('./routes/index');
 const rooms = require('./routes/rooms');
+const contact = require('./routes/contact');
 
 const Room = require('./models/room');
 const User = require('./models/user');
 
 
 app.use(index);
+app.use(contact);
 app.use('/room', rooms);
+
+const data = require('./data');
+data.createFile();
 
 server.listen(port, () => console.log('Server started'));

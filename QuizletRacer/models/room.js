@@ -7,6 +7,8 @@ const User = require('./user');
 const rp = require('request-promise');
 const cheerio = require('cheerio');
 
+const stats = require('./../data');
+
 var roomSchema = new Schema({
 
     code: String,
@@ -44,7 +46,10 @@ roomSchema.methods.joinRoom = function (user, cb) {
             console.log(err.message);
             cb(false, err.message);
         }
-        else cb(true, 'Joined room');
+        else {
+            stats.userJoined();
+            cb(true, 'Joined room');
+        }
 
     });
 
@@ -362,6 +367,7 @@ roomSchema.statics.createRoom = function (link, alternative, alternatives, allTe
 
 
                 });
+                stats.roomCreated();
 
                 newRoom.save(cb);
 
