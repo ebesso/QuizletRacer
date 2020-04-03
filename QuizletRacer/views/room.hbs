@@ -19,8 +19,29 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/jquery-ui.min.css" />
 
-
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.textfill.min.js" type="text/javascript"></script>
+
+
+    <!--<script src="../public/js/jquery.min.js" type="text/javascript"></script>
+    <script src="../public/js/jquery-ui.min.js" type="text/javascript"></script>
+
+    <script src="../public/js/socket.io.js" type="text/javascript"></script>
+
+    <script src="../public/js/connections.js" type="text/javascript"></script>
+
+    <script src="../public/js/chat.js" type="text/javascript"></script>
+    <script src="../public/js/user.js" type="text/javascript"></script>
+    <script src="../public/js/jquery.textfill.min.js" type="text/javascript"></script>
+
+    <script src="../public/js/game.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="../public/css/room.css" />
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../public/css/jquery-ui.min.css" />
+
+
+    <script src="../public/js/bootstrap.min.js"></script>-->
 
 </head>
 <body>
@@ -103,10 +124,12 @@
 
                 </div>
 
-                <div id="question-container">
-
-                    <center><h2 id="question">What is 3x3?</h2></center>
-
+                <div id="question-container" class="col-12">
+                    <center>
+                        <div id="question-label-container">
+                            <span id="question">What is the true meaning of life according to the mosr recent studies conducted by researchers at harvard univeristy? And what can be the reason for the unpresident increase in suicide amongst elderly ladies living in county of netherfield.</span>
+                        </div>
+                    </center>
                     <div id="input-container">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Answer" id="answer">
@@ -118,6 +141,11 @@
 
                     <div id="alternatives-container">
                         <div class="btn-group col-12" id="alternatives">
+                            <button class="btn btn-outline-secondary alternative-button col-3" type="button">1</button>
+                            <button class="btn btn-outline-secondary alternative-button col-3" type="button">2</button>
+                            <button class="btn btn-outline-secondary alternative-button col-3" type="button">3</button>
+                            <button class="btn btn-outline-secondary alternative-button col-3" type="button">4</button>
+
                         </div>
                     </div>
 
@@ -132,21 +160,19 @@
                 <div class="row overflow-auto" id="chat-window">
 
                     <ul id="chat" class="col-12">
-
-
                     </ul>
 
                 </div>
 
                 <div class="row">
-
-
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Message" id="message-input">
+                    <div class="input-group mb-3" style="height: 40px;">
+                        <input type="text" class="form-control" placeholder="Message" id="message-input" style="height: 40px;">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" id="send-button">Send</button>
                         </div>
                     </div>
+
+
 
                 </div>
 

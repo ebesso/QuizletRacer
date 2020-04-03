@@ -278,8 +278,6 @@ roomSchema.statics.findRoom = function (code, cb) {
 
 roomSchema.statics.createRoom = function (link, alternative, alternatives, allTerms, terms, answerDefinitions, cb) {
 
-    console.log(answerDefinitions);
-
     var configuration = {
 
         alternative: alternative,
@@ -296,6 +294,8 @@ roomSchema.statics.createRoom = function (link, alternative, alternatives, allTe
     for (var i = 0; i < 7; i++) code += characters.charAt(Math.floor(Math.random() * characters.length));
 
     terms = []
+
+
 
     rp(link)
         .then(function (html) {
@@ -329,49 +329,30 @@ roomSchema.statics.createRoom = function (link, alternative, alternatives, allTe
                 }
 
             });
-            //var promise = new Promise((resolve, reject) => {
 
-            //    if (answerDefinitions == false) {
+            if (terms.length == 0) {
+                console.log('Invalid link, no terms');
+                cb({ message: 'Invalid link' }, null);
+                return;
+            }
 
-            //        console.log('Answer with term');
+            var newRoom = new Room({
 
-            //        for (var i = 0; i < term.length; i++) {
-            //            var temp = term[i]['term'];
+                code: code,
+                link: link,
 
-            //            term[i]['term'] = term[i]['definition'];
-            //            term[i]['definition'] = temp;
+                terms: terms,
+                users: [],
 
-            //            if (i + 1 == term.length) resolve();
+                active: false,
 
-            //        }
-
-            //    } else {
-            //        resolve();
-            //    }
-
-            //});
-
-            //promise.then(() => {
-
-                var newRoom = new Room({
-
-                    code: code,
-                    link: link,
-
-                    terms: terms,
-                    users: [],
-
-                    active: false,
-
-                    configuration: configuration
+                configuration: configuration
 
 
-                });
-                stats.roomCreated();
+            });
+            stats.roomCreated();
 
-                newRoom.save(cb);
-
-            //});
+            newRoom.save(cb);
             
 
 

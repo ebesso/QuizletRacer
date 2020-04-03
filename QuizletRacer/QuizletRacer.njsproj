@@ -68,6 +68,7 @@
     <Content Include="public\js\connections.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="public\js\jquery.textfill.min.js" />
     <Content Include="public\js\socket.io.js">
       <SubType>Code</SubType>
     </Content>
@@ -75,6 +76,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="README.md" />
+    <Content Include="routes\contact.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="routes\index.js">
       <SubType>Code</SubType>
     </Content>
@@ -100,6 +104,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="views\connect.hbs">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="views\contact.hbs">
       <SubType>Code</SubType>
     </Content>
     <Content Include="views\create_room.hbs" />

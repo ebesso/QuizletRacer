@@ -27,11 +27,24 @@
 
 #question {
     
-    font-size: 3.5vw;
+    font-size: 12px;
+}
 
-    margin-top: 100px;
-    margin-bottom: 160px;
+#question-container{
+    height: 390px;
+}
 
-    line-height: 100px;
+#question-label-container{
+    height: 250px;
+    margin-bottom: 40px;
+    width: 100%;
+    word-break: break-word;
+}
 
+#alternatives{
+
+    height: 100px;
+}
+.alternative-button{
+    height: 100%;
 }

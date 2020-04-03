@@ -1,5 +1,12 @@
 $(document).ready(function () {
 
+    $('#question-label-container').textfill({
+        widthOnly: false,
+        maxFontPixels: 96,
+        minFontPixels: 12,
+        innerTag: '#question'
+    });
+
     var socket = window.socket;
 
     var terms = []
@@ -113,9 +120,11 @@ $(document).ready(function () {
 
             });
 
-        }
-        $('#question').html(terms[index]);
 
+        }
+
+
+        $('#question').html(terms[index]);
 
 
     }
