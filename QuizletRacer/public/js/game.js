@@ -193,6 +193,11 @@ $(document).ready(function () {
 
     function end_game() {
 
+        terms = []
+        definitions = []
+
+        alternatives = null;
+
         window.started = false;
 
         $('#intermission-container').show();
